@@ -1,8 +1,11 @@
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import Home from './components/home/HomeStructure'
+
 import './App.css'
 
 function App() {
+
+	
   
 
   return (
