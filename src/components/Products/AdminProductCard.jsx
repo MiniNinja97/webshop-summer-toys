@@ -1,34 +1,42 @@
-import React from 'react';
-import './products.css';
+import React, { useState } from 'react';
+import './products.css'
 
-function AdminProductCard({ product }) {
+import { addProduct } from '../../data/crud'; 
+
+function AdminProductCard({ product, setProducts }) {
+  const [newName, setNewName] = useState('');
+  const [newPrice, setNewPrice] = useState('');
+  const [newUrl, setNewUrl] = useState('');
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    const newProduct = {
+      name: newName,
+      price: newPrice,
+      url: newUrl
+    };
+    await addProduct(newProduct, setProducts);
+    setNewName('');
+    setNewPrice('');
+    setNewUrl('');
+  };
+
   return (
-    <div className="product-page">
-		<h1>Admin Page</h1>
-		<h4>Home</h4>
-		<div className='add-new'>
-			<h3>Add new Product:</h3>
-			<form>
-				<label>Url:</label>
-				<input/>
-				<label>Name:</label>
-				<input/>
-				<label>Price:</label>
-				<input/>
-				<button>Add new Product</button>
-			</form>
+    <div className="admin-product-card">
+      <h4>{product.name}</h4>
+      <p>Price: {product.price}</p>
+      <img src={product.url} alt={product.name} />
 
-		</div>
-		<div>
-			<input/>
-		</div>
-      <div className="product-card">
-		<button>Delete</button>
-        <img className="beachball" src={product.url} alt={product.name} />
-        <h3 className="headline">{product.name}</h3>
-        <p className="price">Price: {product.price} $</p>
-		<button>Save Edits</button>
-      </div>
+      
+      <form onSubmit={handleAdd}>
+        <label>New Name:</label>
+        <input value={newName} onChange={(e) => setNewName(e.target.value)} />
+        <label>New Price:</label>
+        <input value={newPrice} onChange={(e) => setNewPrice(e.target.value)} />
+        <label>New Url:</label>
+        <input value={newUrl} onChange={(e) => setNewUrl(e.target.value)} />
+        <button type="submit">Add Product</button>
+      </form>
     </div>
   );
 }
