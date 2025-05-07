@@ -1,46 +1,39 @@
 
-// Importera React-hooks om du inte redan gjort det
-import React, { useEffect } from 'react';
-
-// Importera din db-instans som du exporterade
-import { db } from '../../data/database'; // Adjust the path if your firebaseConfig file is elsewhere
-
-// Importera Firestore-funktioner
+import React, { useEffect, useState } from 'react';
+import { db } from '../../data/database';
 import { collection, getDocs } from 'firebase/firestore';
+import ProductCards from './ProductCards'; // Importera din kort-komponent
 
 function ToyProductsList() {
+  const [products, setProducts] = useState([]); // Skapa state
+
   useEffect(() => {
-    // Define an async function to fetch the data
     const fetchProducts = async () => {
       try {
-        // 1. Get a reference to the 'toyProducts' collection
         const productsCollectionRef = collection(db, 'toyProducts');
-
-        // 2. Get a snapshot of the documents in the collection
         const querySnapshot = await getDocs(productsCollectionRef);
-
-        // 3. Loop through the documents and log their data
-        console.log("Fetching data from 'toyProducts':");
-        querySnapshot.forEach((doc) => {
-          // doc.data() is the document's data
-          console.log(doc.id, " => ", doc.data());
-        });
-
+        const fetchedProducts = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProducts(fetchedProducts); // Spara datan i state
+        console.log("Fetched products:", fetchedProducts);
       } catch (error) {
         console.error("Error fetching products: ", error);
       }
     };
 
-    // Call the function to fetch the data when the component mounts
     fetchProducts();
+  }, []);
 
-  }, []); // The empty dependency array [] ensures this effect runs only once when the component mounts
-
-  // You need to return some JSX, even if it's just null or a loading message
   return (
     <div>
-      <h2>Toy Products (Check console)</h2>
-      {/* You would typically render the data here */}
+      <h2>Toy Products</h2>
+      <div className="product-list">
+        {products.map((product) => (
+          <ProductCards key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,13 +1,13 @@
-// import React from 'react';
+import React from 'react';
 
-// const ProductCards = ({ product }) => {
-//   return (
-//     <div className="product-card">
-//       <img src={product.url} alt={product.name} className="product-image" />
-//       <h3>{product.name}</h3>
-//       <p>Price: ${product.price}</p>
-//     </div>
-//   );
-// };
+function ProductCards({ product }) {
+	return (
+	  <div className="product-card">
+		<h3>{product.name}</h3>
+		<p><strong>Pris:</strong> {product["Price "]} kr</p>
+		<img src={product["Url"]} alt={product.name} />
+	  </div>
+	);
+  }
 
-// export default ProductCards;
+export default ProductCards;
