@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import './products.css'
+import './products.css';
 
-import { addProduct } from '../../data/crud'; 
+import { addProduct, deleteProduct } from '../../data/crud'; // Importera deleteProduct
 
 function AdminProductCard({ product, setProducts }) {
   const [newName, setNewName] = useState('');
   const [newPrice, setNewPrice] = useState('');
   const [newUrl, setNewUrl] = useState('');
 
+  // Funktion för att lägga till en ny produkt
   const handleAdd = async (e) => {
     e.preventDefault();
     const newProduct = {
@@ -15,28 +16,43 @@ function AdminProductCard({ product, setProducts }) {
       price: newPrice,
       url: newUrl
     };
-    await addProduct(newProduct, setProducts);
+    await addProduct(newProduct, setProducts);  // Lägg till produkt i Firestore
     setNewName('');
     setNewPrice('');
     setNewUrl('');
   };
 
-  return (
-    <div className="admin-product-card">
-      <h4>{product.name}</h4>
-      <p>Price: {product.price}</p>
-      <img src={product.url} alt={product.name} />
+  // Funktion för att ta bort produkt
+  const handleDelete = async () => {
+    await deleteProduct(product.id, setProducts); // Anropa deleteProduct med produktens id
+  };
 
-      
-      <form onSubmit={handleAdd}>
-        <label>New Name:</label>
-        <input value={newName} onChange={(e) => setNewName(e.target.value)} />
-        <label>New Price:</label>
-        <input value={newPrice} onChange={(e) => setNewPrice(e.target.value)} />
-        <label>New Url:</label>
-        <input value={newUrl} onChange={(e) => setNewUrl(e.target.value)} />
-        <button type="submit">Add Product</button>
-      </form>
+  return (
+    <div className="product-page"> {/* Använd samma klass för övergripande container */}
+      <div className="product-card"> {/* Använd samma klass för kortet */}
+        <img className="beachball" src={product.url} alt={product.name} /> {/* Produktbild */}
+        <h3 className="headline">{product.name}</h3> {/* Produktnamn */}
+        <p className="price">Price: {product.price} $</p> {/* Produktpris */}
+        
+        {/* Ta bort produkt-knapp */}
+        <button onClick={handleDelete}>Delete</button>
+        
+        {/* Formulär för att lägga till ny produkt */}
+        <h3>Add New Product</h3>
+        <form onSubmit={handleAdd}>
+          <label>New Name:</label>
+          <input value={newName} onChange={(e) => setNewName(e.target.value)} />
+          <label>New Price:</label>
+          <input value={newPrice} onChange={(e) => setNewPrice(e.target.value)} />
+          <label>New Url:</label>
+          <input value={newUrl} onChange={(e) => setNewUrl(e.target.value)} />
+          <button type="submit">Add Product</button>
+        </form>
+      </div>
+      <footer>
+        <p>Back to top</p>
+        <p>Admin</p>
+      </footer>
     </div>
   );
 }
