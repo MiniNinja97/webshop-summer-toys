@@ -10,6 +10,10 @@ function ProductCards({ product }) {
         <p className="price">Price: {product.price} $</p>
         <button>Add to cart</button>
       </div>
+	  <footer>
+		<p>Back to top</p>
+		<p>Admin</p>
+	  </footer>
     </div>
   );
 }
