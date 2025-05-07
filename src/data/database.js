@@ -1,18 +1,21 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
-// Din Firebase-konfiguration (från Steg 3)
-const firebaseConfig = <your-config-object/>; // Hämta denna från Firebase Console
 
-// Initiera Firebase
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCEwm2RXYpEzBVJR1E6Olcek-rXOFaAspM",
+  authDomain: "summer-toy-shop.firebaseapp.com",
+  projectId: "summer-toy-shop",
+  storageBucket: "summer-toy-shop.firebasestorage.app",
+  messagingSenderId: "106628536677",
+  appId: "1:106628536677:web:7763fa5211525363c3a98c"
+};
+
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Hämta en referens till Firestore
 const db = getFirestore(app);
 
-// Hämta en referens till din "produkter"-samling
-const productsCollectionRef = collection(db, "produkter");
-
-// Nu kan du använda productsCollectionRef för att läsa eller skriva data!
-
-export {db, productsCollectionRef};
+export {db};
