@@ -1,17 +1,16 @@
 import React from 'react';
 import './products.css';
 
-function ProductCards({ product }) {
+function AdminProductCard({ product }) {
   return (
     <div className="product-page">
       <div className="product-card">
         <img className="beachball" src={product.url} alt={product.name} />
         <h3 className="headline">{product.name}</h3>
         <p className="price">Price: {product.price} $</p>
-        <button>Add to cart</button>
       </div>
     </div>
   );
 }
 
-export default ProductCards;
+export default AdminProductCard;

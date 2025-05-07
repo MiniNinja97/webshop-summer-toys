@@ -1,25 +1,24 @@
-
 import React, { useEffect, useState } from 'react';
 import { db } from '../../data/database';
 import { collection, getDocs } from 'firebase/firestore';
-import ProductCards from './ProductCards'; // Importera din kort-komponent
+import ProductCards from './ProductCards';
+import AdminProductCard from './AdminProductCard';
 
-function ToyProductsList() {
-  const [products, setProducts] = useState([]); // Skapa state
+function ToyProductList({ isAdmin }) {
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const productsCollectionRef = collection(db, 'toyProducts');
-        const querySnapshot = await getDocs(productsCollectionRef);
-        const fetchedProducts = querySnapshot.docs.map((doc) => ({
+        const snapshot = await getDocs(collection(db, 'toyProducts'));
+        const data = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        setProducts(fetchedProducts); // Spara datan i state
-        console.log("Fetched products:", fetchedProducts);
+		console.log("Fetched products:", data);
+        setProducts(data);
       } catch (error) {
-        console.error("Error fetching products: ", error);
+        console.error('Error fetching products:', error);
       }
     };
 
@@ -27,15 +26,16 @@ function ToyProductsList() {
   }, []);
 
   return (
-    <div>
-      <h2>Toy Products</h2>
-      <div className="product-list">
-        {products.map((product) => (
+    <div className="product-list">
+      {products.map((product) =>
+        isAdmin ? (
+          <AdminProductCard key={product.id} product={product} />
+        ) : (
           <ProductCards key={product.id} product={product} />
-        ))}
-      </div>
+        )
+      )}
     </div>
   );
 }
 
-export default ToyProductsList;
+export default ToyProductList;
