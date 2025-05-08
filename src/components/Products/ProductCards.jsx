@@ -10,6 +10,9 @@ function ProductCards() {
   const goToAdmin = () => {
 	navigate('/admin');
   }
+  const goToHome = () => {
+	navigate('/');
+  }
 
   useEffect(() => {
     fetchProducts();
@@ -17,6 +20,14 @@ function ProductCards() {
 
   return (
     <div className="product-page">
+		<div className='title'>
+			<h1>Summer Toy Shop</h1>
+		</div>
+		<div className='Product-links'>
+			<p onClick={goToHome}>Home</p>
+			<p>Cart</p>
+
+		</div>
       {products.map((product) => (
         <div key={product.id} className="product-card">
           <img className="beachball" src={product.url} alt={product.name} />

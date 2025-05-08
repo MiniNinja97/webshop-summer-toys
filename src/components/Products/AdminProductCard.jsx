@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './products.css';
 import { addProduct, deleteProduct } from '../../data/crud';
 import useProductStore from './productStore';
+import { useNavigate } from 'react-router-dom';
 
 function AdminProductCard() {
   const { products, fetchProducts } = useProductStore();
@@ -26,18 +27,24 @@ function AdminProductCard() {
     await deleteProduct(id, fetchProducts); // Tar bort från Firestore och uppdaterar
   };
 
-  return (
-    <div className="product-page">
-      {products.map((product) => (
-        <div key={product.id} className="product-card">
-          <img className="beachball" src={product.url} alt={product.name} />
-          <h3 className="headline">{product.name}</h3>
-          <p className="price">Price: {product.price} $</p>
-          <button onClick={() => handleDelete(product.id)}>Delete</button>
-        </div>
-      ))}
+  const navigate =useNavigate();
+  const goToProducts = () => {
+	navigate('/products');
+  }
+  const goToHome = () => {
+	navigate('/');
+  }
 
-      <h3>Add New Product</h3>
+  return (
+    <div className="product-page"> 
+	<div>
+		<h1>Admin Page</h1>
+	</div>
+	<div>
+		<p onClick={goToHome}>Home</p>
+		<p onClick={goToProducts}>Customer Products</p>
+	</div>
+	<h3>Add New Product</h3>
       <form onSubmit={handleAdd}>
         <label>New Name:</label>
         <input value={newName} onChange={(e) => setNewName(e.target.value)} />
@@ -47,6 +54,16 @@ function AdminProductCard() {
         <input value={newUrl} onChange={(e) => setNewUrl(e.target.value)} />
         <button type="submit">Add Product</button>
       </form>
+      {products.map((product) => (
+        <div key={product.id} className="product-card">
+          <img className="beachball" src={product.url} alt={product.name} />
+          <h3 className="headline">{product.name}</h3>
+          <p className="price">Price: {product.price} $</p>
+          <button onClick={() => handleDelete(product.id)}>Delete</button>
+        </div>
+      ))}
+
+     
 
       <footer>
         <p>Back to top</p>
