@@ -39,33 +39,33 @@
 // }
 
 
-import React, { useEffect, useState } from 'react';
-import { getProducts } from '../../data/crud'; 
-import ProductCards from './ProductCards';
-import AdminProductCard from './AdminProductCard';
+// import React, { useEffect, useState } from 'react';
+// import { getProducts } from '../../data/crud'; 
+// import ProductCards from './ProductCards';
+// import AdminProductCard from './AdminProductCard';
 
-function ToyProductList({ isAdmin }) {
-  const [products, setProducts] = useState([]);
+// function ToyProductList({ isAdmin }) {
+//   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    getProducts(setProducts); 
-  }, []);
+//   useEffect(() => {
+//     getProducts(setProducts); 
+//   }, []);
 
-  return (
-    <div className="product-list">
-      {products.map((product) =>
-        isAdmin ? (
-          <AdminProductCard
-            key={product.id}
-            product={product}
-            setProducts={setProducts} 
-          />
-        ) : (
-          <ProductCards key={product.id} product={product} />
-        )
-      )}
-    </div>
-  );
-}
+//   return (
+//     <div className="product-list">
+//       {products.map((product) =>
+//         isAdmin ? (
+//           <AdminProductCard
+//             key={product.id}
+//             product={product}
+//             setProducts={setProducts} 
+//           />
+//         ) : (
+//           <ProductCards key={product.id} product={product} />
+//         )
+//       )}
+//     </div>
+//   );
+// }
 
-export default ToyProductList;
+// export default ToyProductList;
