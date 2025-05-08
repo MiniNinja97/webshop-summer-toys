@@ -37,6 +37,10 @@
 //   }
   
 //   export { getProducts, addProduct };
+
+
+
+
 import { collection, doc, getDocs, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "./database.js";
 
@@ -59,7 +63,7 @@ async function addProduct(productObject, setProducts) {
       url: productObject.url,
       timestamp: Date.now()
     });
-    getProducts(setProducts); // Uppdatera produktlistan
+    getProducts(setProducts); 
   } catch (error) {
     console.error('Fel vid tillägg av produkt:', error);
   }
@@ -68,16 +72,16 @@ async function addProduct(productObject, setProducts) {
 // Funktion för att ta bort produkt
 async function deleteProduct(productId, setProducts) {
   try {
-    // Skapa referens till dokumentet som ska tas bort
+    
     const productDocRef = doc(db, 'toyProducts', productId);
 
-    // Ta bort dokumentet
+   
     await deleteDoc(productDocRef);
 
     console.log(`Produkt med ID ${productId} har tagits bort.`);
 
-    // Hämta den uppdaterade listan efter borttagning
-    getProducts(setProducts); // Uppdatera listan med produkter
+    
+    getProducts(setProducts); 
   } catch (error) {
     console.error('Fel vid borttagning av produkt:', error);
   }

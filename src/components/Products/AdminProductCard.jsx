@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './products.css';
 
-import { addProduct, deleteProduct } from '../../data/crud'; // Importera deleteProduct
+import { addProduct, deleteProduct } from '../../data/crud'; 
 
 function AdminProductCard({ product, setProducts }) {
   const [newName, setNewName] = useState('');
@@ -24,20 +24,19 @@ function AdminProductCard({ product, setProducts }) {
 
   // Funktion för att ta bort produkt
   const handleDelete = async () => {
-    await deleteProduct(product.id, setProducts); // Anropa deleteProduct med produktens id
+    await deleteProduct(product.id, setProducts); 
   };
 
   return (
-    <div className="product-page"> {/* Använd samma klass för övergripande container */}
-      <div className="product-card"> {/* Använd samma klass för kortet */}
-        <img className="beachball" src={product.url} alt={product.name} /> {/* Produktbild */}
-        <h3 className="headline">{product.name}</h3> {/* Produktnamn */}
-        <p className="price">Price: {product.price} $</p> {/* Produktpris */}
-        
-        {/* Ta bort produkt-knapp */}
+    <div className="product-page"> 
+      <div className="product-card"> 
+        <img className="beachball" src={product.url} alt={product.name} /> 
+        <h3 className="headline">{product.name}</h3> 
+        <p className="price">Price: {product.price} $</p> 
+       
         <button onClick={handleDelete}>Delete</button>
         
-        {/* Formulär för att lägga till ny produkt */}
+       
         <h3>Add New Product</h3>
         <form onSubmit={handleAdd}>
           <label>New Name:</label>
