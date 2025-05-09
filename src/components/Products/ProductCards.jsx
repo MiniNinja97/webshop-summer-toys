@@ -13,6 +13,9 @@ function ProductCards() {
   const goToHome = () => {
 	navigate('/');
   }
+  const goToCart = () => {
+	navigate('/cart');
+  }
 
   useEffect(() => {
     fetchProducts();
@@ -25,7 +28,7 @@ function ProductCards() {
 		</div>
 		<div className='Product-links'>
 			<p onClick={goToHome}>Home</p>
-			<p>Cart</p>
+			<p onClick={goToCart}>Cart</p>
 
 		</div>
       {products.map((product) => (

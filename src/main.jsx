@@ -7,6 +7,7 @@ import { createHashRouter, RouterProvider } from 'react-router-dom';
 import HomeStructure from './components/home/HomeStructure.jsx';
 import ProductCards from './components/Products/ProductCards.jsx';
 import AdminProductCard from './components/Products/AdminProductCard.jsx';
+import CartStructure from './components/cart/Cartstructure.jsx';
 
 const router = createHashRouter([
   {
@@ -24,7 +25,11 @@ const router = createHashRouter([
       {
         path: 'admin',
         Component: AdminProductCard
-      }
+      },
+	  {
+		path: 'cart',
+		Component: CartStructure
+	  }
     ]
   }
 ]);
