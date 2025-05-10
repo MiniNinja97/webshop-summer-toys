@@ -32,17 +32,20 @@ function ProductCards() {
 
   return (
     <div className="product-page">
-		<div className='title'>
+		<div className='product-header'>
 			<h1>Summer Toy Shop</h1>
-		</div>
-		<div className='Product-links'>
+		
+		<div className='product-links'>
 			<p onClick={goToHome}>Home</p>
 			<p onClick={goToCart}>Cart ({totalItems})</p>
+			</div>
 
 		</div>
+		<div className="product-grid">
       {products.map((product) => (
         <div key={product.id} className="product-card">
           <img className="beachball" src={product.url} alt={product.name} />
+		  <div className="product-info">
           <h3 className="headline">{product.name}</h3>
           <p className="price">Price: {product.price} $</p>
 		  {lastAddedId === product.id && (
@@ -57,10 +60,12 @@ function ProductCards() {
 								>
 								Add to cart
 							</button>
+			</div>
 				
 				
         </div>
       ))}
+	  </div>
       <footer>
         <p>Back to top</p>
         <p className='admin-btn'  onClick={goToAdmin}>Admin</p>
