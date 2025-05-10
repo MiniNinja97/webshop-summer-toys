@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import './products.css';
 import useProductStore from './productStore';
 import { useNavigate } from 'react-router-dom';
+import { cartData } from '../../data/cartdata';
+import { useState } from 'react';
 
 function ProductCards() {
   const { products, fetchProducts } = useProductStore();
+  const addToCart = cartData((state) => state.addToCart);
+  const [lastAddedId, setLastAddedId] = useState(null);
 
   const navigate = useNavigate();
   const goToAdmin = () => {
@@ -36,7 +40,20 @@ function ProductCards() {
           <img className="beachball" src={product.url} alt={product.name} />
           <h3 className="headline">{product.name}</h3>
           <p className="price">Price: {product.price} $</p>
-          <button>Add to cart</button>
+		  {lastAddedId === product.id && (
+			<p className="confirmation"> {product.name} added to cart!</p>)}
+			
+						<button 
+								onClick={() => {
+									addToCart(product);
+									setLastAddedId(product.id);
+									setTimeout(() => setLastAddedId(null), 2000); 
+								}}
+								>
+								Add to cart
+							</button>
+				
+				
         </div>
       ))}
       <footer>
