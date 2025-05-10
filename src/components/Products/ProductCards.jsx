@@ -9,6 +9,11 @@ function ProductCards() {
   const { products, fetchProducts } = useProductStore();
   const addToCart = cartData((state) => state.addToCart);
   const [lastAddedId, setLastAddedId] = useState(null);
+  const cart = cartData((state) => state.cart);
+  console.log(cart);
+  const totalItems = cart && cart.length > 0 
+  ? cart.reduce((sum, product) => sum + product.quantity, 0)
+  : 0;
 
   const navigate = useNavigate();
   const goToAdmin = () => {
@@ -32,7 +37,7 @@ function ProductCards() {
 		</div>
 		<div className='Product-links'>
 			<p onClick={goToHome}>Home</p>
-			<p onClick={goToCart}>Cart</p>
+			<p onClick={goToCart}>Cart ({totalItems})</p>
 
 		</div>
       {products.map((product) => (
