@@ -96,33 +96,47 @@ function AdminProductCard() {
         </div>
       </div>
 
-      <h3>Add New Product</h3>
+      <h3 className='add-product'>Add New Product</h3>
+      
+      {/* FIX: Byt handleSubmit till handleAdd */}
       <form onSubmit={handleAdd}>
-        <label>New Name:</label>
-        <input
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        {errors.name && <p className="error">{errors.name}</p>}
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            value={formData.name}
+            onChange={handleChange}
+            name="name"
+          />
+          <small className="error">{errors.name}</small>
+        </div>
 
-        <label>New Price:</label>
-        <input
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-        />
-        {errors.price && <p className="error">{errors.price}</p>}
+        <div className="form-group">
+          <label htmlFor="price">Price</label>
+          <input
+            id="price"
+            type="text"
+            value={formData.price}
+            onChange={handleChange}
+            name="price"
+          />
+          <small className="error">{errors.price}</small>
+        </div>
 
-        <label>New Url:</label>
-        <input
-          name="url"
-          value={formData.url}
-          onChange={handleChange}
-        />
-        {errors.url && <p className="error">{errors.url}</p>}
+        <div className="form-group">
+          <label htmlFor="url">URL:</label>
+          <input
+            id="url"
+            type="text"
+            value={formData.url}
+            onChange={handleChange}
+            name="url"
+          />
+          <small className="error">{errors.url}</small>
+        </div>
 
-        <button type="submit">Add Product</button>
+        <button className="add-btn" type="submit">Lägg till produkt</button>
       </form>
 
       <div className="product-grid">
@@ -188,5 +202,6 @@ function AdminProductCard() {
 }
 
 export default AdminProductCard;
+
 
 

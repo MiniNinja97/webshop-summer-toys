@@ -51,11 +51,61 @@ h1 {
   padding: 1rem;
   align-items: stretch; 
 }
-@media (min-width: 1024px) {
-  .product-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+
+.add-product {
+	color: #FE7244;
+	font-size: 1.8em;
 }
+form {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.4em;
+  color: #0698bd;
+  font-weight: 500;
+  min-height: 10em;
+  position: relative; 
+}
+
+.form-group {
+  margin-bottom: 1.8em;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+form label {
+  font-size: 1.6em;
+  color: #0698bd;
+  font-weight: 600;
+  margin-bottom: 0.3em; 
+  font-family: 'Fredoka', sans-serif;
+}
+form input {
+	border: none;
+	border-radius: 10px;
+	padding: 0.5em;
+}
+
+.error {
+  display: block;
+  min-height: 1.4em;
+  color: red;
+  font-size: 1em;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.error:not(:empty) {
+  opacity: 1;
+}
+
+.add-btn {
+  margin-top: 1em;
+  margin-bottom: 2em;
+  min-height: 3em;
+}
+
 
 
 .product-card {
@@ -128,6 +178,11 @@ footer p {
   flex-direction: column;
   gap: 0.5em;
   margin-top: 1em;
+}
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media (min-width: 768px) {
