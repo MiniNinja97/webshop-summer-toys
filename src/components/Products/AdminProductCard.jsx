@@ -1,14 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './products.css';
 import useProductStore from './productStore';
 import { useNavigate } from 'react-router-dom';
 import { addProduct, deleteProduct, editProduct } from '../../data/crud';
+import { useFormValidation, validationSchema } from './formValidation';
 
 function AdminProductCard() {
   const { products, fetchProducts } = useProductStore();
-  const [newName, setNewName] = useState('');
-  const [newPrice, setNewPrice] = useState('');
-  const [newUrl, setNewUrl] = useState('');
+  const navigate = useNavigate();
+
+  const {
+    formData,
+    setFormData,
+    handleChange,
+    errors,
+    isFormValid,
+  } = useFormValidation(validationSchema, {
+    name: '',
+    price: '',
+    url: '',
+  });
+
+  const {
+    formData: editFormData,
+    setFormData: setEditFormData,
+    handleChange: handleEditChange,
+    errors: editErrors,
+    isFormValid: isEditFormValid,
+  } = useFormValidation(validationSchema, {
+    name: '',
+    price: '',
+    url: '',
+  });
 
   useEffect(() => {
     fetchProducts();
@@ -16,11 +39,16 @@ function AdminProductCard() {
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    const newProduct = { name: newName, price: newPrice, url: newUrl };
+    if (!isFormValid()) return;
+
+    const newProduct = {
+      name: formData.name,
+      price: formData.price,
+      url: formData.url,
+    };
+
     await addProduct(newProduct, fetchProducts);
-    setNewName('');
-    setNewPrice('');
-    setNewUrl('');
+    setFormData({ name: '', price: '', url: '' });
   };
 
   const handleDelete = async (id) => {
@@ -28,39 +56,38 @@ function AdminProductCard() {
   };
 
   const [editProductId, setEditProductId] = useState(null);
-  const [editName, setEditName] = useState('');
-  const [editPrice, setEditPrice] = useState('');
 
   const handleEditClick = (product) => {
     setEditProductId(product.id);
-    setEditName(product.name);
-    setEditPrice(product.price);
+    setEditFormData({
+      name: product.name,
+      price: product.price,
+      url: product.url,
+    });
   };
 
   const handleSaveEdit = async () => {
-    const updateProduct = {
-      name: editName,
-      price: editPrice,
-      url: products.find(p => p.id === editProductId).url,
+    if (!isEditFormValid()) return;
+
+    const updatedProduct = {
+      name: editFormData.name,
+      price: editFormData.price,
+      url: editFormData.url,
     };
 
-    await editProduct(editProductId, updateProduct, fetchProducts);
+    await editProduct(editProductId, updatedProduct, fetchProducts);
     setEditProductId(null);
   };
 
   const hasChanges = (product) => {
-    return (
-      product.name !== editName ||
-      product.price !== editPrice
-    );
+    return product.name !== editFormData.name || product.price !== editFormData.price;
   };
 
-  const navigate = useNavigate();
   const goToProducts = () => navigate('/products');
   const goToHome = () => navigate('/');
 
   return (
-    <div className="product-page"> 
+    <div className="product-page">
       <div className="product-header">
         <h1>Admin Page</h1>
         <div className="product-links">
@@ -72,43 +99,83 @@ function AdminProductCard() {
       <h3>Add New Product</h3>
       <form onSubmit={handleAdd}>
         <label>New Name:</label>
-        <input value={newName} onChange={(e) => setNewName(e.target.value)} />
+        <input
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        {errors.name && <p className="error">{errors.name}</p>}
+
         <label>New Price:</label>
-        <input value={newPrice} onChange={(e) => setNewPrice(e.target.value)} />
+        <input
+          name="price"
+          value={formData.price}
+          onChange={handleChange}
+        />
+        {errors.price && <p className="error">{errors.price}</p>}
+
         <label>New Url:</label>
-        <input value={newUrl} onChange={(e) => setNewUrl(e.target.value)} />
+        <input
+          name="url"
+          value={formData.url}
+          onChange={handleChange}
+        />
+        {errors.url && <p className="error">{errors.url}</p>}
+
         <button type="submit">Add Product</button>
       </form>
 
       <div className="product-grid">
         {products.map((product) => (
           <div key={product.id} className="product-card">
-  <img className="beachball" src={product.url} alt={product.name} />
+            <img className="beachball" src={product.url} alt={product.name} />
 
-  <div className="product-info">
-    {editProductId === product.id ? (
-      <>
-        <input value={editName} onChange={(e) => setEditName(e.target.value)} />
-        <input value={editPrice} onChange={(e) => setEditPrice(e.target.value)} />
-      </>
-    ) : (
-      <>
-        <h3 className="headline" onClick={() => handleEditClick(product)}>{product.name}</h3>
-        <p className="price" onClick={() => handleEditClick(product)}>Price: {product.price} $</p>
-      </>
-    )}
+            <div className="product-info">
+              {editProductId === product.id ? (
+                <>
+                  <input
+                    name="name"
+                    value={editFormData.name}
+                    onChange={handleEditChange}
+                  />
+                  {editErrors.name && <p className="error">{editErrors.name}</p>}
 
-    <div className="button-group">
-  <button onClick={() => handleDelete(product.id)}>Delete</button>
-  <button
-    onClick={handleSaveEdit}
-    disabled={editProductId !== product.id || !hasChanges(product)}
-  >
-    Save Edit
-  </button>
-</div>
-  </div>
-</div>
+                  <input
+                    name="price"
+                    value={editFormData.price}
+                    onChange={handleEditChange}
+                  />
+                  {editErrors.price && <p className="error">{editErrors.price}</p>}
+
+                  <input
+                    name="url"
+                    value={editFormData.url}
+                    onChange={handleEditChange}
+                  />
+                  {editErrors.url && <p className="error">{editErrors.url}</p>}
+                </>
+              ) : (
+                <>
+                  <h3 className="headline" onClick={() => handleEditClick(product)}>
+                    {product.name}
+                  </h3>
+                  <p className="price" onClick={() => handleEditClick(product)}>
+                    Price: {product.price} $
+                  </p>
+                </>
+              )}
+
+              <div className="button-group">
+                <button onClick={() => handleDelete(product.id)}>Delete</button>
+                <button
+                  onClick={handleSaveEdit}
+                  disabled={editProductId !== product.id || !hasChanges(product)}
+                >
+                  Save Edit
+                </button>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
 
@@ -121,3 +188,5 @@ function AdminProductCard() {
 }
 
 export default AdminProductCard;
+
+
