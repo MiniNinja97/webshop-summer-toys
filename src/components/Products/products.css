@@ -160,6 +160,31 @@ button {
 	color: #fde081;
 	text-decoration: underline;
 }
+.product-info input {
+  width: 100%;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f3f3f3;
+  font-size: 15px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* Felmeddelanden för redigering */
+.product-info .error {
+  height: 16px;
+  color: red;
+  font-size: 12px;
+  margin-bottom: 8px;
+  visibility: hidden;
+}
+
+/* Visa fel om de finns */
+.product-info .error.show {
+  visibility: visible;
+}
 
 	
 footer {

@@ -98,7 +98,7 @@ function AdminProductCard() {
 
       <h3 className='add-product'>Add New Product</h3>
       
-      {/* FIX: Byt handleSubmit till handleAdd */}
+      
       <form onSubmit={handleAdd}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -152,21 +152,21 @@ function AdminProductCard() {
                     value={editFormData.name}
                     onChange={handleEditChange}
                   />
-                  {editErrors.name && <p className="error">{editErrors.name}</p>}
+                  <p className={`error ${editErrors.name ? 'show' : ''}`}>{editErrors.name}</p>
 
                   <input
                     name="price"
                     value={editFormData.price}
                     onChange={handleEditChange}
                   />
-                  {editErrors.price && <p className="error">{editErrors.price}</p>}
+                  <p className={`error ${editErrors.price ? 'show' : ''}`}>{editErrors.price}</p>
 
                   <input
                     name="url"
                     value={editFormData.url}
                     onChange={handleEditChange}
                   />
-                  {editErrors.url && <p className="error">{editErrors.url}</p>}
+                  <p className={`error ${editErrors.url ? 'show' : ''}`}>{editErrors.url}</p>
                 </>
               ) : (
                 <>
