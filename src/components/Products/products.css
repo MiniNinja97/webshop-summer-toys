@@ -43,6 +43,55 @@ h1 {
 		justify-content: flex-start;
 		margin-left: 2em;
 }
+.filter-section {
+  /* margin-top: -5em;  */
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  text-align: center;
+}
+.filter-row h3 {
+	font-size: 1.5em;
+
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-row h3 {
+  margin-right: 1rem;
+  color: #5e4435;
+}
+.filter-row p button {
+	font-size: 1.2em;
+	color: #5e4435;
+
+}
+.filter-row button {
+	font-size: 1em;
+	
+
+}
+.search-row h4 {
+	font-size: 1.4em;
+	color: #5e4435;
+}
+.search-row input {
+	border: none;
+	border-radius: 10px;
+	padding: 0.5em;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
 .product-grid {
   display: grid;
@@ -54,7 +103,7 @@ h1 {
 
 .add-product {
 	color: #FE7244;
-	font-size: 1.8em;
+	font-size: 2.5em;
 }
 form {
   display: flex;
@@ -172,7 +221,7 @@ button {
   outline: none;
 }
 
-/* Felmeddelanden för redigering */
+
 .product-info .error {
   height: 16px;
   color: red;
@@ -181,7 +230,7 @@ button {
   visibility: hidden;
 }
 
-/* Visa fel om de finns */
+
 .product-info .error.show {
   visibility: visible;
 }
@@ -197,6 +246,7 @@ footer p {
 	font-size: 1.6em;
   color: #5e4435;
   font-weight: 600;
+  cursor: pointer;
 }
 .button-group {
   display: flex;

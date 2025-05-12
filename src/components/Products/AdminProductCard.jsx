@@ -194,8 +194,8 @@ function AdminProductCard() {
       </div>
 
       <footer>
-        <p>Back to top</p>
-        <p>Admin</p>
+        <p onClick={() => window.scrollTo({ top: 0, behavior: 'smooth'})}>Back to top</p>
+        <p onClick={goToProducts}>Customer Products</p>
       </footer>
     </div>
   );

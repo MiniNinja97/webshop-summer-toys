@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { cartData } from '../../data/cartdata';
+import './cart.css'
 
 function CartStructure () {
 
@@ -17,35 +18,49 @@ function CartStructure () {
 	};
 
 	return (
-		<div>
+		<div className='cart-container'>
+			<div className='cart-title'>
 			<h1>Summer Toy Shop</h1>
 			<p onClick={goToProducts}>Back to products</p>
-			<h4>Your Cart</h4>
+			</div>
+			
+			<h4 className='your-cart'>Your Cart</h4>
 			{cart.length === 0 ? (
 				<p>Your cart is empty</p>
 			) : (
 				<div>
-					<ul>
+					<ul className='cart-products'>
 						{cart.map((product) => (
-							<li key={product.id}>
-								<p>{product.name}</p>
-								<p>Price: {product.price}</p>
-								<p>Quantity: {product.quantity}</p>
+							<li key={product.id} className='cart-product'>
+							
+							<div className='product-header'>
+								<p className='product-name'>{product.name}</p>
+								<p className='product-price'>
+									Price: {(product.price * product.quantity).toFixed(2)} $
+								</p>
+							</div>
 
-								<button onClick={() => updateQuantity(product.id, product.quantity + 1)}>+</button>
-								<button 
+							<div className="quantity-row">
+								<div className="quantity-buttons">
+									<button onClick={() => updateQuantity(product.id, product.quantity + 1)}>+</button>
+									<button 
 									onClick={() => updateQuantity(product.id, product.quantity - 1)}
 									disabled={product.quantity === 1}
-								>
-									-
-								</button>
-								<button onClick={() => removeFromCart(product.id)}>Remove</button>
+									>-</button>
+								</div>
+								<p className="quantity">Quantity: {product.quantity}</p>
+								</div>
+
+							<button className='remove-btn' onClick={() => removeFromCart(product.id)}>Remove</button>
 							</li>
 						))}
-					</ul>
-					<p>Total: {totalPrice.toFixed(2)} $</p>
+						</ul>
+
+					
 				</div>
+
 			)}
+			<div className='total-price'><p>Total: {totalPrice.toFixed(2)} $</p></div>
 		</div>
 	);
 };
