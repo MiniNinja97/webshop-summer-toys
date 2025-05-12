@@ -8,6 +8,7 @@ import HomeStructure from './components/home/HomeStructure.jsx';
 import ProductCards from './components/Products/ProductCards.jsx';
 import AdminProductCard from './components/Products/AdminProductCard.jsx';
 import CartStructure from './components/cart/Cartstructure.jsx';
+import LogInPage from './components/login/loginPage.jsx'
 
 const router = createHashRouter([
   {
@@ -22,6 +23,10 @@ const router = createHashRouter([
         path: 'products',
         Component: ProductCards
       },
+	  {
+		path: 'login',
+		Component: LogInPage
+	  },
       {
         path: 'admin',
         Component: AdminProductCard

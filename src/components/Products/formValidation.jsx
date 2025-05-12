@@ -30,6 +30,28 @@ export const validationSchema = Joi.object({
       'string.empty': 'Required.',
       
     }),
+	username: Joi.string()
+	.min(4)
+	.required()
+	.messages({
+      
+      'string.empty': ' Required.',
+	  'string.min': 'To short'
+      
+      
+    }),
+	password: Joi.string()
+	.min(8)
+	.required()
+	.messages({
+      
+      'string.empty': ' Required.',
+	  'string.min': 'To short'
+      
+      
+    }),
+
+
 });
 
 

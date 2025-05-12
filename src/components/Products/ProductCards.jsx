@@ -18,7 +18,7 @@ function ProductCards() {
   const [searchText, setSearchText] = useState('');
 
   const navigate = useNavigate();
-  const goToAdmin = () => navigate('/admin');
+  const goToLogin = () => navigate('/login');
   const goToHome = () => navigate('/');
   const goToCart = () => navigate('/cart');
 
@@ -98,7 +98,7 @@ function ProductCards() {
 
       <footer>
         <p onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Back to top</p>
-        <p className="admin-btn" onClick={goToAdmin}>Admin</p>
+        <p className="admin-btn" onClick={goToLogin}>Admin</p>
       </footer>
     </div>
   );
