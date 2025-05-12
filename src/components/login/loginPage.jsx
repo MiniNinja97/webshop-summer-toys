@@ -2,6 +2,7 @@
 import { useFormValidation, validationSchema } from '../Products/formValidation';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './login.css';
 
 function LoginPage() {
   const inputValues = { username: '', password: '' };
@@ -13,18 +14,18 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Kontrollera om formuläret är giltigt och om användarnamn/lösenord är korrekt
+    
     if (formData.username === 'admin' && formData.password === 'password') {
-      navigate('/admin'); // Navigera till adminsidan
+      navigate('/admin'); 
     } else {
-      setLoginError('Invalid username or password'); // Visa felmeddelande
+      setLoginError('Invalid username or password'); 
     }
   };
 
-  const isLoginButtonEnabled = formData.username === 'admin' && formData.password === 'password'; // Knappen är bara aktiverad om rätt användarnamn och lösenord är inskrivna
+  const isLoginButtonEnabled = formData.username === 'admin' && formData.password === 'password'; 
 
   return (
-    <div>
+    <div className='login-page'>
       <h1>Summer Toy Shop</h1>
       <h3>Admin log in:</h3>
 
@@ -36,7 +37,9 @@ function LoginPage() {
           value={formData.username}
           onChange={handleChange}
         />
-        {errors.username && <p className="error">{errors.username}</p>}
+         <p className={`error ${errors.username ? 'show' : ''}`}>
+				{errors.username}
+			</p>
 
         <label>Password:</label>
         <input
@@ -45,13 +48,15 @@ function LoginPage() {
           value={formData.password}
           onChange={handleChange}
         />
-        {errors.password && <p className="error">{errors.password}</p>}
+        <p className={`error ${errors.password ? 'show' : ''}`}>
+			{errors.password}
+		</p>
 
         <button type="submit" disabled={!isLoginButtonEnabled}>Log in</button>
       </form>
 
-      {/* Felmeddelande för ogiltiga inloggningsuppgifter */}
-      {loginError && <p className="error-message">{loginError}</p>}
+      
+      <p className={`error ${loginError ? 'show' : ''}`}>{loginError}</p>
     </div>
   );
 }
