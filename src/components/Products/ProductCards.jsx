@@ -28,14 +28,18 @@ function ProductCards() {
 
   let sortedProducts = [...products];
 
+  // sorteringen
   if (sortOption === 'priceLow') {
     sortedProducts.sort((a, b) => a.price - b.price);
   } else if (sortOption === 'priceHigh') {
     sortedProducts.sort((a, b) => b.price - a.price);
-  } else if (sortOption === 'name') {
+  } else if (sortOption === 'nameAZ') {
     sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortOption === 'nameZA') {
+    sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
   }
 
+  // sökrutan
   const filteredProducts = sortedProducts.filter((product) =>
     product.name.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -51,7 +55,6 @@ function ProductCards() {
         </div>
       </div>
 
-      
       <div className="filter-section">
         <div className="filter-row">
           <h3>Filter products</h3>
@@ -59,7 +62,8 @@ function ProductCards() {
           <button onClick={() => setSortOption('priceLow')}>Low</button>
           <button onClick={() => setSortOption('priceHigh')}>High</button>
           <p className='name-filter'>Name:</p>
-          <button onClick={() => setSortOption('name')}>A-Z</button>
+          <button onClick={() => setSortOption('nameAZ')}>A-Z</button>
+          <button onClick={() => setSortOption('nameZA')}>Z-A</button>
         </div>
         <div className="search-row">
           <h4>Search:</h4>
@@ -68,7 +72,6 @@ function ProductCards() {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          
         </div>
       </div>
 
@@ -105,3 +108,4 @@ function ProductCards() {
 }
 
 export default ProductCards;
+
