@@ -55,10 +55,10 @@ function ProductCards() {
       <div className="filter-section">
         <div className="filter-row">
           <h3>Filter products</h3>
-          <p>Price:</p>
+          <p className='price-filter'>Price:</p>
           <button onClick={() => setSortOption('priceLow')}>Low</button>
           <button onClick={() => setSortOption('priceHigh')}>High</button>
-          <p>Name:</p>
+          <p className='name-filter'>Name:</p>
           <button onClick={() => setSortOption('name')}>A-Z</button>
         </div>
         <div className="search-row">

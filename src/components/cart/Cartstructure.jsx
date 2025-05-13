@@ -26,7 +26,7 @@ function CartStructure () {
 			
 			<h4 className='your-cart'>Your Cart</h4>
 			{cart.length === 0 ? (
-				<p>Your cart is empty</p>
+				<p className='empty'>Your cart is empty</p>
 			) : (
 				<div>
 					<ul className='cart-products'>

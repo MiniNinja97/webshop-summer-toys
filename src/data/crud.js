@@ -2,7 +2,7 @@
 import { collection, doc, getDocs, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "./database.js";
 
-// Funktion för att hämta produkter
+// Hämta produkter
 async function getProducts(setProducts) {
   const productsCollectionRef = collection(db, 'toyProducts');
   const snapshot = await getDocs(productsCollectionRef);
@@ -11,7 +11,7 @@ async function getProducts(setProducts) {
   console.log('Hämtade produkter:', productsList);
 }
 
-// Funktion för att lägga till ny produkt
+// Lägg till produkt
 async function addProduct(productObject, setProducts) {
   try {
     const productsCollectionRef = collection(db, 'toyProducts');
@@ -27,43 +27,21 @@ async function addProduct(productObject, setProducts) {
   }
 }
 
-// Funktion för att ta bort produkt
+// Ta bort produkt
 async function deleteProduct(productId, setProducts) {
   try {
-    
     const productDocRef = doc(db, 'toyProducts', productId);
-
-   
     await deleteDoc(productDocRef);
-
     console.log(`Produkt med ID ${productId} har tagits bort.`);
-
-    
     getProducts(setProducts); 
   } catch (error) {
     console.error('Fel vid borttagning av produkt:', error);
   }
-
-
-  async function editProduct(productId, newProduct, setProduct) {
-	const messageRef = doc(db, "products", productId); // Referens till dokumentet
-
-	try {
-		await updateDoc(messageRef, {
-			text: newText // Uppdatera text-fältet
-		})
-		console.log("Dokument uppdaterat!")
-		getMessages(setProducts)
-
-	} catch (e) {
-		console.error("Fel vid uppdatering av dokument: ", e)
-	}
-}
 }
 
+// Redigera produkt
 async function editProduct(productId, newProduct, setProducts) {
-  const productDocRef = doc(db, "toyProducts", productId); // Rätt kollektion
-
+  const productDocRef = doc(db, "toyProducts", productId);
   try {
     await updateDoc(productDocRef, {
       name: newProduct.name,
@@ -71,8 +49,7 @@ async function editProduct(productId, newProduct, setProducts) {
       url: newProduct.url,
     });
     console.log("Produkten uppdaterad!");
-
-    getProducts(setProducts); // Hämta uppdaterad lista
+    getProducts(setProducts);
   } catch (error) {
     console.error("Fel vid uppdatering av produkt: ", error);
   }

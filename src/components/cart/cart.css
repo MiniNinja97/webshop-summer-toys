@@ -21,6 +21,11 @@ cursor: pointer;
 .your-cart {
 	font-size: 1.8em;
 }
+.empty {
+	font-size: 1.2em;
+	text-align: center;
+	font-weight: 500;
+}
 
 .cart-products {
   display: flex;
