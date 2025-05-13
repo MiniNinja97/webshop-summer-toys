@@ -334,7 +334,7 @@ footer p {
   }
 
   .search-row input {
-    width: 90%; /* Minska bredden på inputfältet */
+    width: 90%; 
   }
 }
 
@@ -363,7 +363,7 @@ footer p {
   }
 
   .search-row input {
-    width: 100%; /* Gör inputfältet full bredd */
+    width: 100%; 
   }
 }
 
@@ -374,7 +374,7 @@ footer p {
   }
 
   .search-row input {
-    width: 100%; /* Full bredd på inputfält */
+    width: 100%; 
     padding: 0.4em;
   }
 
