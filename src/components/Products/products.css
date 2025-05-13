@@ -350,9 +350,7 @@ footer p {
     /* gap: 1rem; */
   }
 
-  .filter-section {
-    /* padding: 1rem; */
-  }
+ 
 
   .filter-row {
     flex-direction: column;
@@ -369,10 +367,7 @@ footer p {
   }
 }
 
-@media (max-width: 320px) {
-  .product-header {
-    /* padding: 0.5rem; */
-  }
+
 
   .filter-row {
     gap: 1rem;
