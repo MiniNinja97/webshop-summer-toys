@@ -14,6 +14,7 @@ function ProductCards() {
     ? cart.reduce((sum, product) => sum + product.quantity, 0)
     : 0;
 
+	// sorteringen
   const [sortOption, setSortOption] = useState(null);
   const [searchText, setSearchText] = useState('');
 

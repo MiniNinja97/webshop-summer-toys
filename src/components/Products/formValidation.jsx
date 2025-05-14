@@ -2,6 +2,7 @@ import Joi from 'joi';
 import { useState } from 'react';
 
 
+//till inlogget
 export const validationSchema = Joi.object({
   username: Joi.string()
     .min(4)
@@ -20,6 +21,8 @@ export const validationSchema = Joi.object({
 });
 
 
+
+//till edit och ny produkt
 export const productValidationSchema = Joi.object({
   name: Joi.string()
     .min(3)

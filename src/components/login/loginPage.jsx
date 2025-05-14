@@ -14,7 +14,8 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
+    if (!isFormValid()) return;
+
     if (formData.username === 'admin' && formData.password === 'password') {
       navigate('/admin'); 
     } else {
@@ -37,9 +38,9 @@ function LoginPage() {
           value={formData.username}
           onChange={handleChange}
         />
-         <p className={`error ${errors.username ? 'show' : ''}`}>
-				{errors.username}
-			</p>
+        <p className={`error ${errors.username ? 'show' : ''}`}>
+          {errors.username}
+        </p>
 
         <label>Password:</label>
         <input
@@ -49,13 +50,12 @@ function LoginPage() {
           onChange={handleChange}
         />
         <p className={`error ${errors.password ? 'show' : ''}`}>
-			{errors.password}
-		</p>
+          {errors.password}
+        </p>
 
         <button type="submit" disabled={!isLoginButtonEnabled}>Log in</button>
       </form>
 
-      
       <p className={`error ${loginError ? 'show' : ''}`}>{loginError}</p>
     </div>
   );
