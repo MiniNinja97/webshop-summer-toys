@@ -1,4 +1,4 @@
-Page:
+Page: https://minininja97.github.io/webshop-summer-toys/
 
 Welcome to 'Summer Toy Shop'! 🌞🎈
 
